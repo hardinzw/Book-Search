@@ -1,0 +1,10 @@
+.media-snippet {
+    padding: 1.5rem;
+  }
+  
+  .media {
+    align-items: flex-start;
+    display: flex;
+    text-align: left;
+  }
+  
