@@ -4,32 +4,12 @@ import { ListItem } from "../List";
 
 const Book = ({
   title,
-  subtitle,
   authors,
   link,
   description,
   image,
-  Button
+
 }) => {
-  const truncateText = (str, length, ending) => {
-    if (str) {
-      if (length == null) {
-        length = 100;
-      }
-      if (ending == null) {
-        ending = "...";
-      }
-      if (str.length > length) {
-        return str.substring(0, length - ending.length) + ending;
-      } else {
-        return str;
-      }
-    }
-    return str;
-  };
-
-  const truncateDescription = truncateText(description, 255, "...");
-
   return (
     <ListItem>
       <div className="media-snippet">
@@ -41,9 +21,8 @@ const Book = ({
           </figure>
           <div className="media-content">
             <h3 className="heading-title">{title}</h3>
-            {subtitle && <h5 className="heading-subtitle">{subtitle}</h5>}
             <p className="heading-subtitle">by {authors} (Author)</p>
-            <p className="p-article">{truncateDescription}</p>
+            <p className="p-article">{description}</p>
             <div className="d-flex flex-row bd-highlight mb-3">
               <div className="p-2 bd-highlight">
                 <a
@@ -56,7 +35,6 @@ const Book = ({
                 </a>
               </div>
               <div className="p-2 bd-highlight">
-                <Button />
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 // This file exports the Input, TextArea, and FormBtn components
 
-export function SearchForm({ query, handleInputChange, handleFormSubmit }) {
+export function SearchForm({ q, handleInputChange, handleFormSubmit }) {
   return (
     <form className="form-inline" role="form">
       <div className="form-group mx-sm-3 mb-2">
@@ -13,9 +13,9 @@ export function SearchForm({ query, handleInputChange, handleFormSubmit }) {
           className="form-control heading-subtitle "
           id="Title"
           type="text"
-          value={query}
+          value={q}
           placeholder="Book Title..."
-          name="query"
+          name="q"
           onChange={handleInputChange}
           size="55"
           required

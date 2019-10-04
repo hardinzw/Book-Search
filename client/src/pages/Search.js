@@ -8,27 +8,29 @@ import Book from "../components/Book/index";
 class Search extends Component {
   state = {
     books: [],
-    query: "",
-    message: "Search for books via the Google Books API"
+    q: "",
+    message: "Search for books via the Google Books API",
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.getBooks();
   }
 
-  loadBooks = () => {
-    API.getBooks(this.state.query)
+  getBooks = () => {
+    API.getBooks(this.state.q)
       .then(res =>
         this.setState({
           books: res.data,
+          currentPage: 1
         })
       )
       .catch((err) => {
         this.setState({
           books: [],
           message: "Your search did not find any results.",
+          currentPage: 1
         });
-        
+      console.log(err); 
       });
   };
 
@@ -41,19 +43,19 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.loadBooks();
+    this.getBooks();
   };
 
   handleBookSave = id => {
     const book = this.state.books.find(book => book.id === id);
 
     API.saveBook({
-      googleId: book.id,
       title: book.volumeInfo.title,
-      link: book.volumeInfo.infoLink,
-      author: book.volumeInfo.authors,
+      authors: book.volumeInfo.authors,
+      googleId: book.id,
       description: book.volumeInfo.description,
-      image: book.volumeInfo.imageLinks.thumbnail
+      image: book.volumeInfo.imageLinks.thumbnail,
+      link: book.volumeInfo.infoLink,
     }).then(() => this.getBooks());
   };
 
@@ -79,7 +81,7 @@ class Search extends Component {
               <SearchForm
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
-                q={this.state.query}
+                q={this.state.q}
               />
 
             </div>
@@ -96,7 +98,6 @@ class Search extends Component {
                   <Book
                     key={book.id}
                     title={book.volumeInfo.title}
-                    subtitle={book.volumeInfo.subtitle}
                     link={book.volumeInfo.infoLink}
                     authors={book.volumeInfo.authors.join(", ")}
                     description={book.volumeInfo.description}
