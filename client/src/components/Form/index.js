@@ -1,11 +1,13 @@
 import React from "react";
+import "./style.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 // This file exports the Input, TextArea, and FormBtn components
 
 export function SearchForm({ q, handleInputChange, handleFormSubmit }) {
   return (
     <form className="form-inline" role="form">
-      <div className="form-group mx-sm-3 mb-2">
         <label htmlFor="Title" className="sr-only">
           Search Book Title
         </label>
@@ -16,17 +18,16 @@ export function SearchForm({ q, handleInputChange, handleFormSubmit }) {
           value={q}
           placeholder="Book Title..."
           name="q"
-          onChange={handleInputChange}
-          size="55"
+          size="52"
+          onChange={handleInputChange}         
           required
         />
-      </div>
       <button
         onClick={handleFormSubmit}
         type="submit"
-        className="btn btn-lg search-button heading-subtitle"
+        className="btn search-btn heading-subtitle ml-2"
       >
-        Search
+        <FontAwesomeIcon icon={faSearch} />
       </button>
     </form>
   );

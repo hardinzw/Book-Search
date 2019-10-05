@@ -97,6 +97,36 @@ const bookSeed = [
   },
 ];
 
+async function seed() {
+  await mongoose
+    .connect(
+      MONGODB_URI,
+      options
+    )
+    .then(() => {
+      console.log("Seed: Connected to Database");
+    })
+    .catch(err => {
+      console.log("Seed: Not Connected to Database ERROR! ", err);
+    });
+  for (let book of booksSeed) {
+    const { _id: bookId } = await new Book({
+      title: book.title,
+      authors: book.authors,
+      link: book.link,
+      description: book.description,
+      image: book.image,
+      googleId: book.googleId
+    }).save();
+  }
+
+  mongoose.disconnect();
+
+  console.info("Seed: Done!");
+}
+
+seed();
+
 db.Book
   .remove({})
   .then(() => db.Book.collection.insertMany(bookSeed))

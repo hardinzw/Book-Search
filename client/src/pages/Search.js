@@ -3,6 +3,9 @@ import API from "../utils/API";
 import SearchForm from "../components/Form";
 import { List } from "../components/List/index";
 import Book from "../components/Book/index";
+import { Row, Col, Container } from "../components/Grid";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 
 
 class Search extends Component {
@@ -12,25 +15,19 @@ class Search extends Component {
     message: "Search for books via the Google Books API",
   };
 
-  componentDidMount() {
-    this.getBooks();
-  }
-
   getBooks = () => {
     API.getBooks(this.state.q)
       .then(res =>
         this.setState({
           books: res.data,
-          currentPage: 1
         })
       )
       .catch((err) => {
         this.setState({
           books: [],
           message: "Your search did not find any results.",
-          currentPage: 1
         });
-      console.log(err); 
+        console.log(err);
       });
   };
 
@@ -61,68 +58,69 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-10 col-centered">
-          <div className="d-flex flex-wrap flex-row bd-highlight mb-3 justify-content-center align-items-center">
-            <div className="order-sm-2 p-2 bd-highlight">
-              <img
-                className="image-250"
-                src=""
-                alt="React Google Books Search"
-              />
-            </div>
-            <div className="order-sm-1 p-2 bd-highlight">
-              <h1 className="heading-title mx-sm-3 mb-2">
-                React Google Books Search
-                </h1>
-              <h2 className="heading-subtitle mx-sm-3 mb-2">
-                Search for and Save Books of Interest.
-                </h2>
-              <SearchForm
-                handleInputChange={this.handleInputChange}
-                handleFormSubmit={this.handleFormSubmit}
-                q={this.state.q}
-              />
-
-            </div>
-          </div>
-        </div>
-
+      <Container Fluid>
         <div className="row">
-          <div className="col-10 col-centered card-content mb-4">
-            <h1 className="heading-title mx-sm-3 mb-2 text-center">Results</h1>
-
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <Book
-                    key={book.id}
-                    title={book.volumeInfo.title}
-                    link={book.volumeInfo.infoLink}
-                    authors={book.volumeInfo.authors.join(", ")}
-                    description={book.volumeInfo.description}
-                    image={book.volumeInfo.imageLinks.thumbnail}
-                    Button={() => (
-                      <button
-                        onClick={() => this.handleBookSave(book.id)}
-                        className="btn save-button  heading-subtitle ml-2"
-                      >
-                        Save
-                      </button>
-                    )}
-                  />
-                ))}
-              </List>
-            ) : (
-              <div className="mockup-content">
-                <h2 className="heading-title text-center">
-                  {this.state.message}
-                </h2>
+          <div className="col-12">     
+            <div className="heading">
+              <div className="book-search-image">
+                <img
+                  src="http://abebooks.typepad.com/photos/uncategorized/2007/11/08/magnifying_glass_2.jpg"
+                  alt="React Google Books Search"
+                />
               </div>
-            )}
+              <div className="headline">
+                <h1>
+                  React Google Books Search
+                </h1>
+                <h2>
+                  Search for and Save Books of Interest
+                </h2>
+                </div>
+              
+                <SearchForm
+                  handleInputChange={this.handleInputChange}
+                  handleFormSubmit={this.handleFormSubmit}
+                  q={this.state.q}
+                />  
+              </div>                      
           </div>
         </div>
-      </div>
+        <div className="row">
+          <div className="col-10 col-centered card-content">
+            <div className="result-div">
+              <h2 className="results text-center">Results</h2>
+              {this.state.books.length ? (
+                <List>
+                  {this.state.books.map(book => (
+                    <Book
+                      key={book.id}
+                      title={book.volumeInfo.title}
+                      link={book.volumeInfo.infoLink}
+                      authors={book.volumeInfo.authors}
+                      description={book.volumeInfo.description}
+                      image={book.volumeInfo.imageLinks.thumbnail}
+                      Button={() => (
+                        <button
+                          onClick={() => this.handleBookSave(book.id)}
+                          className="btn save-btn heading-subtitle ml-2"
+                        >
+                        <FontAwesomeIcon icon={faBookmark} />
+                        </button>
+                      )}
+                    />
+                  ))}
+                </List>
+              ) : (
+                  <div className="mockup-content">
+                    <h2 className="heading-title text-center">
+                      {this.state.message}
+                    </h2>
+                  </div>
+                )}
+            </div>
+</div>
+</div>
+      </Container>
     )
   }
 }

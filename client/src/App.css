@@ -1,22 +1,133 @@
-.App {
-  text-align: center;
+.save-btn {
+  width: 10%;
+  margin-left: .5rem;
+  border-radius: 5px;
+  font-size: 2rem;
 }
 
-.App-logo {
-  height: 40vmin;
+.book-search-image {
+  float: right;
+  margin-right: 5.3rem;
+  margin-top: 2%
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.book-search-image > img {
+  width: 70%;
+  height: auto;
+}
+
+.heading {
+  padding: 1rem;
+  float: left
+}
+
+.headline {
+  justify-content: left;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-family: 'Roboto Mono', monospace;
+  margin-top: 2%;
+  margin-right: 4%;
 }
 
-.App-link {
-  color: #09d3ac;
+.headline > h1 {
+  font-size: 35px
 }
+
+.headline > h2 {
+  font-size: 20px
+}
+
+.headline > h3 {
+  font-size: 35px
+}
+
+.headline > h4 {
+  font-size: 30px
+}
+
+.result-div {
+  padding: 1rem;
+  background-color: white;
+  margin: 1rem;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.image.is-128xauto {
+  margin-left: auto;
+  margin-right: auto;
+  width: 190px;
+  height: auto;
+}
+
+.mockup-content {
+  height: 200px;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  font-family: 'Roboto Mono', monospace;
+}
+
+.delete-btn {
+  font-size: 2rem;
+  width: 10%;
+  margin-left: 2rem;
+}
+
+@media (max-width: 576px) {
+  .heading {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .book-search-image > img {
+    width: 50%;
+    height: auto;
+  }
+
+  .headline > h1 {
+    font-size: 28px
+  }
+
+  .headline > h2 {
+    font-size: 18px
+  }
+}
+
+@media (max-width: 960px) {
+  .heading {
+    justify-content: left;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .book-search-image {
+    float: right
+  }
+
+  .book-search-image > img {
+    width: 100%;
+    height: auto;
+  }
+
+  .headline > h1 {
+    font-size: 28px
+  }
+
+  .headline > h2 {
+    font-size: 18px
+  }
+}
+
