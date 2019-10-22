@@ -3,7 +3,7 @@ import API from "../utils/API";
 import SearchForm from "../components/Form";
 import { List } from "../components/List/index";
 import Book from "../components/Book/index";
-import { Row, Col, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 

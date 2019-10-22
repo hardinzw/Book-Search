@@ -4,11 +4,11 @@ import Book from "../components/Book/index";
 import API from "../utils/API";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Row, Col, Container } from "../components/Grid";
+import { Container } from "../components/Grid";
 
 class Library extends Component {
   state = {
-    books: []
+    savedBooks: []
   };
     
   componentDidMount() {
@@ -16,10 +16,10 @@ class Library extends Component {
   }
     
   getSavedBooks = () => {
-    API.getSavedBooks()
+    API.getBooks()
       .then(res =>
         this.setState({
-          books: res.data
+          savedBooks: res.data
       })
     ).catch(err => console.log(err));
   };
@@ -35,7 +35,7 @@ class Library extends Component {
   };
 
   render() {
-    const { length: count } = this.state.books;
+    const { length: count } = this.state.savedBooks;
     return (
       <Container Fluid>
         <div className="row">
@@ -54,9 +54,9 @@ class Library extends Component {
         </div>
         <div className="row">
           <div className="col-12 col-centered card-content">
-            {this.state.books.length ? (
+            {this.state.savedBooks.length ? (
               <List>
-                {this.state.books.map(book => (
+                {this.state.savedBooks.map(book => (
                   <Book
                     key={book._id}
                     title={book.title}
